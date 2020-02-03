@@ -1,6 +1,29 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span>Third Line</span>
+      <span>Application</span>
+      <div>
+        <a mat-button routerLink="home">
+          Home
+        </a>
+      </div>
+      <div>
+        <a mat-button [matMenuTriggerFor]="uploadMenu">
+          Uploads
+        </a>
+        <mat-menu #uploadMenu="matMenu" xPosition="before">
+          <button mat-menu-item routerLink="upload/list">List</button>
+          <button mat-menu-item routerLink="upload/create">Create</button>
+        </mat-menu>
+      </div>
       <span class="example-spacer"></span>
-      </mat-toolbar-row>
+      <div>
+        <button mat-button [matMenuTriggerFor]="userMenu">
+          {{ user.email }}
+        </button>
+        <mat-menu #userMenu="matMenu" xPosition="before">
+          <button mat-menu-item>Perfil</button>
+          <button (click)="logout()" mat-menu-item>Logout</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
 </mat-toolbar>

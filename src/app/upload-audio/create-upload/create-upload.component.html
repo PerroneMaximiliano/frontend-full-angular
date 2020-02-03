@@ -1,0 +1,36 @@
+<p>Upload file!</p>
+
+<form (submit)="submit()" [formGroup]="uploadForm">
+    <div>
+      <mat-form-field color="primary" style="width: 100%;">
+        <input matInput placeholder="Número" formControlName="number">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field color="primary" style="width: 100%;">
+        <input matInput placeholder="Title" formControlName="title">
+      </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field color="primary" style="width: 100%;">
+          <input matInput placeholder="Duration" formControlName="duration">
+        </mat-form-field>
+    </div>
+    <!--
+        <div>
+        <audio controls>
+            <source src="" type="audio/mpeg">
+                El navegador web no soporta la reproducción de audios
+            </source>
+        </audio>
+    </div>
+    -->
+    <div>
+        <input type="file" placeholder="Upload audio..." formControlName="file" (change)="fileChangeEvent($event)">
+    </div>
+    <div class="buttons-container center">
+      <button type="button" mat-raised-button color="primary" (click)="upload()">
+        Save
+      </button>
+    </div>
+</form>

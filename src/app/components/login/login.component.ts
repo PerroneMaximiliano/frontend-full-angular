@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   isLoggin: boolean = true;
+  errorMessage: String = '';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -49,7 +52,14 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    console.log(this.loginForm.value);
+    this.userService.login(this.loginForm.value).subscribe(resp => {
+
+      localStorage.setItem('identity', JSON.stringify(resp.user));
+      localStorage.setItem('token', resp.token);
+      this.router.navigate(['/']);
+    }, (error: any) => {
+      this.errorMessage = error.err.message;
+    });
   }
 
   createUser() {
