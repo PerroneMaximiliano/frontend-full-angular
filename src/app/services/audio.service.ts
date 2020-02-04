@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Audio } from '../models/audio.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,10 +8,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AudioService {
   baseURL = environment.apiURL;
-
-  HttpUploadOptions = {
-    headers: new HttpHeaders({ Accept: 'application/json' }),
-  };
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +22,16 @@ export class AudioService {
       reportProgress: true,
       observe: 'events'   
     });
+  }
+
+  getAudios() {
+    let headers = new Headers({
+			'Content-Type': 'application/json',
+			'Authorization': ''
+    });
+
+    return this.http.get(this.baseURL + 'audios');
+
   }
   
 }

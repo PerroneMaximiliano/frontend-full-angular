@@ -16,7 +16,6 @@ export class CreateUploadComponent implements OnInit {
   fileUploadProgress: string = null;
   fileData: File = null;
   url: string = '';
-
   audio: Audio = null;
 
   constructor(private formBuilder: FormBuilder, private audioService: AudioService) { 
@@ -46,32 +45,31 @@ export class CreateUploadComponent implements OnInit {
     }
     
     this.uploadForm.value.file = this.fileData;
-
     this.fileUploadProgress = '0%';
 
-    this.audioService.uploadFile(this.uploadForm.value).subscribe(events => {
-      if(events.type === HttpEventType.UploadProgress) {
-        this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-        console.log(this.fileUploadProgress);
-      } else if(events.type === HttpEventType.Response) {
-        this.fileUploadProgress = '';
-
-        this.audio = events.body['audio'];
-
-        console.log(events.body);          
-        alert('SUCCESS !!');
+    this.audioService.uploadFile(this.uploadForm.value).subscribe(
+      response => {
+        if (response.type === HttpEventType.UploadProgress) {
+          this.fileUploadProgress = Math.round(response.loaded / response.total * 100) + '%';
+        } else if (response.type === HttpEventType.Response) {
+          this.fileUploadProgress = '';
+          this.audio = response.body['audio'];
+          alert('Audio se subio correctamente')
+        }
+      },
+      error => {
+        var errorMessage = <any>error;
+        if(errorMessage != null){
+          var body = JSON.parse(error._body);
+          //this.alertMessage = body.message;
+          console.log(error);
+        }
       }
-         
-    });
-  }
-
-  fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
+    )
   }
 
   fileProgress(fileInput: any) {
     this.fileData = <File>fileInput.target.files[0];
-    console.log('file selected', this.fileData)
   }
 
 }
