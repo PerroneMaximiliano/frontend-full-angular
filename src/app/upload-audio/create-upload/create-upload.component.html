@@ -8,7 +8,7 @@
     </div>
     <div>
       <mat-form-field color="primary" style="width: 100%;">
-        <input matInput placeholder="Title" formControlName="title">
+        <input matInput placeholder="Name" formControlName="name">
       </mat-form-field>
     </div>
     <div>
@@ -16,17 +16,15 @@
           <input matInput placeholder="Duration" formControlName="duration">
         </mat-form-field>
     </div>
-    <!--
-        <div>
-        <audio controls>
-            <source src="" type="audio/mpeg">
-                El navegador web no soporta la reproducción de audios
-            </source>
-        </audio>
+
+    <div *ngIf="this.audio?.file && this.audio?.file != 'null'">
+      <audio controls>
+        <source src="{{ url + 'get-audio-file/' + this.audio?.file }}" type="audio/mpeg" />
+          El navegador web no soporta la reproducción de audio
+      </audio>
     </div>
-    -->
     <div>
-        <input type="file" placeholder="Upload audio..." formControlName="file" (change)="fileChangeEvent($event)">
+        <input type="file" placeholder="Upload audio..." formControlName="file" (change)="fileProgress($event)">
     </div>
     <div class="buttons-container center">
       <button type="button" mat-raised-button color="primary" (click)="upload()">
@@ -34,3 +32,4 @@
       </button>
     </div>
 </form>
+
