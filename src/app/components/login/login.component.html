@@ -1,4 +1,37 @@
-<div class="example-container" *ngIf="isLoggin">
+<div class="login-wapper">
+  <mat-card>
+    <div class="example-container">
+      <div class="login-info">
+        <div class="login-info-title">Bienvenido!</div>
+        <div class="login-info-text">Ingresa a la plataforma para visualizar su funcionalidad.</div>
+        <div> <img alt="My image name" src="./assets/images/no-image.jpg" width="75%"> </div>
+      </div>
+      <div class="login-form">
+        <div class="login-info-title">Ingresá</div>
+        <div>
+          <mat-form-field style="width: 100%;">
+            <input matInput placeholder="Email">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field style="width: 100%;">
+            <input matInput placeholder="Password">
+          </mat-form-field>
+        </div>
+        <div class="link-register">Si aun no tienes una cuenta, haz click aqui!</div>
+        <div>
+          <button type="button" mat-raised-button color="primary" (click)="signIn()">
+            Log in
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+
+<!--
+  <div class="example-container" *ngIf="isLoggin">
   <span class="mat-display-3 center">Ingresá</span>
   <ng-container *ngIf="true">
     <span class="error mat-body">{{errorMessage}}</span>
@@ -64,3 +97,4 @@
     </div>
   </form>
 </div>
+-->
