@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  isLoggin: boolean = true;
+  showLoginForm: boolean = true;
   errorMessage: String = '';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) { }
@@ -17,12 +17,24 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  get username() {
+  get lEmail() {
+    return this.loginForm.get('email');
+  }
+
+  get lPassword() {
+    return this.loginForm.get('password');
+  }
+
+  get rEmail() {
     return this.registerForm.get('email');
   }
 
-  get password() {
+  get rPassword() {
     return this.registerForm.get('password');
+  }
+
+  get rName() {
+    return this.registerForm.get('name');
   }
 
   loginForm = this.formBuilder.group({
@@ -62,7 +74,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  createUser() {
+  signUp() {
     if (!this.registerForm.valid) {
       alert('Alguna regla de validación no se está cumpliendo');
       return;

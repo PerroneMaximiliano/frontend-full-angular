@@ -1,100 +1,92 @@
 <div class="login-wapper">
-  <mat-card>
+  <mat-card *ngIf="showLoginForm">
     <div class="example-container">
       <div class="login-info">
-        <div class="login-info-title">Bienvenido!</div>
-        <div class="login-info-text">Ingresa a la plataforma para visualizar su funcionalidad.</div>
+        <div class="login-info-title">¡Bienvenido!</div>
+        <div class="login-info-text">Ingresa a la plataforma para acceder a las funcionalidades.</div>
         <div> <img alt="My image name" src="./assets/images/no-image.jpg" width="75%"> </div>
       </div>
-      <div class="login-form">
-        <div class="login-info-title">Ingresá</div>
-        <div>
-          <mat-form-field style="width: 100%;">
-            <input matInput placeholder="Email">
-          </mat-form-field>
+      <form (submit)="signIn()" [formGroup]="loginForm">
+        <div class="login-form">
+          <div class="login-info-title">Ingresá</div>
+          <div>
+            <mat-form-field style="width: 100%;">
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="lEmail.invalid && (lEmail.dirty || lEmail.touched)">
+                  <div *ngIf="lEmail.errors.required">
+                    The username is required.
+                  </div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field style="width: 100%;">
+              <input matInput placeholder="Password" formControlName="password">
+              <mat-error *ngIf="lPassword.invalid && (lPassword.dirty || lPassword.touched)">
+                  <div *ngIf="lPassword.errors.required">
+                    The password is required.
+                  </div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="link-register" (click)="showLoginForm = !showLoginForm">Si aun no tienes una cuenta, haz click aquí!</div>
+          <div>
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid">
+              Log in
+            </button>
+          </div>
         </div>
-        <div>
-          <mat-form-field style="width: 100%;">
-            <input matInput placeholder="Password">
-          </mat-form-field>
-        </div>
-        <div class="link-register">Si aun no tienes una cuenta, haz click aqui!</div>
-        <div>
-          <button type="button" mat-raised-button color="primary" (click)="signIn()">
-            Log in
-          </button>
-        </div>
-      </div>
+      </form>
     </div>
   </mat-card>
+
+  <mat-card *ngIf="!showLoginForm">
+      <div class="example-container">
+        <div class="login-info">
+          <div class="login-info-title">¡Bienvenido!</div>
+          <div class="login-info-text">Crea tu propia cuenta.</div>
+        </div>
+        <form (submit)="signUp()" [formGroup]="registerForm">
+          <div class="login-form">
+            <div class="login-info-title">Registrate</div>
+            <div>
+              <mat-form-field style="width: 100%;">
+                <input matInput placeholder="Name" formControlName="name">
+                <mat-error *ngIf="rName.invalid && (rName.dirty || rName.touched)">
+                    <div *ngIf="rName.errors.required">
+                      The username is required.
+                    </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field style="width: 100%;">
+                  <input matInput placeholder="Email" formControlName="email">
+                  <mat-error *ngIf="rEmail.invalid && (rEmail.dirty || rEmail.touched)">
+                      <div *ngIf="rEmail.errors.required">
+                        The email is required.
+                      </div>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            <div>
+              <mat-form-field style="width: 100%;">
+                <input matInput placeholder="Password" formControlName="password">
+                <mat-error *ngIf="rPassword.invalid && (rPassword.dirty || rPassword.touched)">
+                    <div *ngIf="rPassword.errors.required">
+                      The password is required.
+                    </div>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="link-register" (click)="showLoginForm = !showLoginForm">Si tenés una cuenta, haz click aquí!</div>
+            <div>
+              <button mat-raised-button color="primary" [disabled]="signUp.invalid">
+                Sign up
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-card>
 </div>
-
-
-<!--
-  <div class="example-container" *ngIf="isLoggin">
-  <span class="mat-display-3 center">Ingresá</span>
-  <ng-container *ngIf="true">
-    <span class="error mat-body">{{errorMessage}}</span>
-  </ng-container>
-
-  <form (submit)="submit()" [formGroup]="loginForm">
-    <div>
-      <mat-form-field color="primary" style="width: 100%;">
-        <input matInput placeholder="Email" formControlName="email">
-      </mat-form-field>
-    </div>
-  
-    <div>
-      <mat-form-field color="primary" style="width: 100%;">
-        <input matInput placeholder="Password" formControlName="password">
-      </mat-form-field>
-    </div>
-  
-    <div class="buttons-container center">
-      <button type="button" mat-raised-button color="primary" (click)="signIn()" style="margin-right: 5px;">
-        Log in
-      </button>
-      <button mat-raised-button color="primary" (click)="isLoggin = !isLoggin">
-        Create Account
-      </button>
-    </div>
-  </form>
-</div>
-
-
-<div class="example-container" *ngIf="!isLoggin">
-  <span class="mat-display-3 center">Bienvenido!</span>
-  <ng-container *ngIf="true">
-    <span class="error mat-body">{{errorMessage}}</span>
-  </ng-container>
-
-  <form (submit)="submit()" [formGroup]="registerForm">
-    <div>
-      <mat-form-field color="primary" style="width: 100%;">
-        <input matInput placeholder="Name" formControlName="name">
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field color="primary" style="width: 100%;">
-        <input matInput placeholder="Email" formControlName="email">
-      </mat-form-field>
-    </div>
-  
-    <div>
-      <mat-form-field color="primary" style="width: 100%;">
-        <input matInput placeholder="Password" formControlName="password">
-      </mat-form-field>
-    </div>
-  
-    <div class="buttons-container center">
-      <button mat-raised-button color="primary" (click)="createUser()" style="margin-right: 5px;">
-        Save
-      </button>
-      <button mat-raised-button color="primary" (click)="isLoggin = !isLoggin">
-        Log in
-      </button>
-    </div>
-  </form>
-</div>
--->
