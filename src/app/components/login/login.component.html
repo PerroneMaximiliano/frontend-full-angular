@@ -6,8 +6,7 @@
         <div class="login-info-text">Ingresa a la plataforma para acceder a las funcionalidades.</div>
         <div> <img alt="My image name" src="./assets/images/no-image.jpg" width="75%"> </div>
       </div>
-      <form (submit)="signIn()" [formGroup]="loginForm">
-        <div class="login-form">
+      <form (submit)="signIn()" [formGroup]="loginForm" class="login-form">
           <div class="login-info-title">Ingresá</div>
           <div>
             <mat-form-field style="width: 100%;">
@@ -35,7 +34,6 @@
               Log in
             </button>
           </div>
-        </div>
       </form>
     </div>
   </mat-card>
@@ -46,8 +44,7 @@
           <div class="login-info-title">¡Bienvenido!</div>
           <div class="login-info-text">Crea tu propia cuenta.</div>
         </div>
-        <form (submit)="signUp()" [formGroup]="registerForm">
-          <div class="login-form">
+        <form (submit)="signUp()" [formGroup]="registerForm" class="login-form">
             <div class="login-info-title">Registrate</div>
             <div>
               <mat-form-field style="width: 100%;">
@@ -85,7 +82,6 @@
                 Sign up
               </button>
             </div>
-          </div>
         </form>
       </div>
     </mat-card>
