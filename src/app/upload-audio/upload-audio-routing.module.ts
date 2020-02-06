@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListUploadComponent } from './list-upload/list-upload.component';
 import { CreateUploadComponent } from './create-upload/create-upload.component';
 import { CanActivateGuard } from '../can-activate.guard';
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: ListUploadComponent
+        component: ListComponent
       },
       {
         path: 'create',

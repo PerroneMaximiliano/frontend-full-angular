@@ -5,9 +5,10 @@ import { UploadAudioRoutingModule } from './upload-audio-routing.module';
 import { ListUploadComponent } from './list-upload/list-upload.component';
 import { CreateUploadComponent } from './create-upload/create-upload.component';
 import { MaterialModule } from '../material/material.module';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [ListUploadComponent, CreateUploadComponent],
+  declarations: [ListUploadComponent, CreateUploadComponent, ListComponent],
   imports: [
     CommonModule,
     UploadAudioRoutingModule,
